@@ -84,5 +84,17 @@ EOF
                 }
             }
         }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t boardgame:latest .'
+            }
+        }
+
+        stage('Trivy Image Scan') {
+            steps {
+                sh 'trivy image --severity HIGH,CRITICAL --no-progress boardgame:latest'
+            }
+        }
     }
 }
