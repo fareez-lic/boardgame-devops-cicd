@@ -1,25 +1,31 @@
 pipeline {
     agent any
-    
+
     tools {
-        jdk 'jdk17'
-        maven 'maven3'
+        maven 'Maven-3.8.7'
     }
-    
-    stages {   
-        stage('Compile') {
+
+    stages {
+
+        stage('Checkout') {
             steps {
-            sh 'mvn compile'
+                checkout scm
             }
         }
-        
+
+        stage('Compile') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+
         stage('Test') {
             steps {
                 sh 'mvn test'
             }
         }
-        
-        stage('Build') {
+
+        stage('Package') {
             steps {
                 sh 'mvn package'
             }
