@@ -96,5 +96,29 @@ EOF
                 sh 'trivy image --severity HIGH,CRITICAL --no-progress boardgame:latest'
             }
         }
+
+        stage('Push Docker Image to Nexus') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'nexus-credentials',
+                        usernameVariable: 'NEXUS_USER',
+                        passwordVariable: 'NEXUS_PASS'
+                    )
+                ]) {
+                    sh '''
+                        echo "$NEXUS_PASS" | docker login 172.31.89.124:8081 \
+                          -u "$NEXUS_USER" \
+                          --password-stdin
+
+                        docker tag boardgame:latest \
+                          172.31.89.124:8081/boardgame-docker/boardgame:latest
+
+                        docker push \
+                          172.31.89.124:8081/boardgame-docker/boardgame:latest
+                    '''
+                }
+            }
+        }
     }
 }
