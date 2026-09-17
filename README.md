@@ -1,5 +1,7 @@
 # 🎲 End-to-End DevSecOps CI/CD Platform for BoardGame
 
+[🌐 View My Portfolio Website](https://fareez-lic.github.io/My-portofolio-html-/)
+
 > A hands-on DevOps portfolio project that builds, scans, packages, stores, deploys, and monitors a Java web application using Jenkins, Maven, SonarQube, Trivy, Nexus, Docker, Kubernetes, Prometheus, and Grafana on AWS EC2.
 
 ## 📌 Project Overview
